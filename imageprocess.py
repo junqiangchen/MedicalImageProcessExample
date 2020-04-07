@@ -228,13 +228,13 @@ def lungSegment(pathDicom):
     sitk.WriteImage(sitk_mask4, 'step5.mha')
     # 6 segtrachea
     lstSeeds = []
-    seed1 = [246, 268, 835]
-    seed2 = [241, 287, 798]
-    seed3 = [272, 277, 798]
+    seed1 = [259, 293, 98]
+    seed2 = [222, 314, 75]
+    seed3 = [282, 304, 75]
     lstSeeds.append(seed1)
     lstSeeds.append(seed2)
     lstSeeds.append(seed3)
-    sitk_tracheamask = RegionGrowThreshold(sitk_src, lstSeeds, -1024, -900)
+    sitk_tracheamask = RegionGrowThreshold(sitk_src, lstSeeds, -1024, -880)
     sitk.WriteImage(sitk_tracheamask, 'step6.mha')
     # 7 lung reduce trachea
     array_tracheamask = sitk.GetArrayFromImage(sitk_tracheamask)
@@ -258,13 +258,13 @@ def lungSegment(pathDicom):
 def tracheaSegment(pathDicom):
     sitk_src = dicomseriesReader(pathDicom)
     lstSeeds = []
-    seed1 = [246, 268, 835]
-    seed2 = [241, 287, 798]
-    seed3 = [272, 277, 798]
+    seed1 = [259, 293, 98]
+    seed2 = [222, 314, 75]
+    seed3 = [282, 304, 75]
     lstSeeds.append(seed1)
     lstSeeds.append(seed2)
     lstSeeds.append(seed3)
-    sitk_mask = RegionGrowThreshold(sitk_src, lstSeeds, -1024, -900)
+    sitk_mask = RegionGrowThreshold(sitk_src, lstSeeds, -1024, -880)
     sitk.WriteImage(sitk_mask, 'tracheamask.mha')
     sitk_trachea = GetMaskImage(sitk_src, sitk_mask, replacevalue=-1500)
     return sitk_trachea
